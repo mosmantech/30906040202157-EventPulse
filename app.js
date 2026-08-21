@@ -18,34 +18,25 @@ const messageRoutes = require('./routes/message.routes');
 const statsRoutes = require('./routes/stats.routes');
 
 const app = express();
-
-
 const server = http.createServer(app);
 
 
 const io = new Server(server, {
-    cors: {
-        origin: '*',
-    }
+    cors: { origin: '*' }
 });
-
 
 io.on('connection', (socket) => {
     console.log(`User connected: ${socket.id}`);
-
-
     socket.on('join-event', (eventId) => {
         socket.join(eventId);
-        console.log(`User ${socket.id} joined room: ${eventId}`);
     });
-
     socket.on('disconnect', () => {
         console.log(`User disconnected: ${socket.id}`);
     });
 });
 
-
 app.set('io', io);
+
 
 if (config.env === 'development') {
     app.use(morgan('dev'));
@@ -57,6 +48,22 @@ app.use((req, res, next) => {
     next();
 });
 
+
+app.use(async (req, res, next) => {
+    try {
+        await connectDB();
+        next();
+    } catch (err) {
+        next(err);
+    }
+});
+
+
+app.get('/', (req, res) => {
+    res.status(200).json({ message: 'EventPulse API is running successfully on Vercel!' });
+});
+
+
 app.use('/api/auth', authRoutes);
 app.use('/api/events', eventRoutes);
 app.use('/api/categories', categoryRoutes);
@@ -64,30 +71,13 @@ app.use('/api/registrations', registrationRoutes);
 app.use('/api/messages', messageRoutes);
 app.use('/api/stats', statsRoutes);
 
-app.all('{*path}', (req, res, next) => {
-    next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
-});
-
-app.use(errorHandler);
-
-
-
-app.get('/', (req, res) => {
-    res.status(200).json({ message: 'EventPulse API is running on Vercel!' });
-});
-
 
 app.use((req, res, next) => {
     next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 
+
 app.use(errorHandler);
-
-
-app.use(async (req, res, next) => {
-    await connectDB();
-    next();
-});
 
 
 if (process.env.NODE_ENV !== 'production') {
