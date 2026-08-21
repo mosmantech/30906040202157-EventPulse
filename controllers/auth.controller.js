@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User.model');
-const AppError = require('../utils/AppError');
+const AppError = require('../utils/appError');
 const asyncHandler = require('../utils/asyncHandler');
 const config = require('../config/config');
 
