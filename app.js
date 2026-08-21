@@ -71,11 +71,26 @@ app.all('{*path}', (req, res, next) => {
 app.use(errorHandler);
 
 
-async function start() {
-    await connectDB();
+
+app.get('/', (req, res) => {
+    res.status(200).send('EventPulse API is running successfully on Vercel!');
+});
+
+app.all('{*path}', (req, res, next) => {
+    next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
+});
+
+app.use(errorHandler);
+
+
+connectDB();
+
+
+if (process.env.NODE_ENV !== 'production') {
     server.listen(config.port, () => {
         console.log(`Server running on port ${config.port}`);
     });
 }
 
-start();
+
+module.exports = app;
