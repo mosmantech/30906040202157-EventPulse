@@ -73,6 +73,27 @@ app.get('/health', (req, res) => {
     });
 });
 
+const swaggerOptions = {
+    definition: {
+        openapi: '3.0.0',
+        info: {
+            title: 'EventPulse API',
+            version: '1.0.0',
+            description: 'API Documentation for EventPulse Application',
+        },
+        servers: [
+            {
+                url: 'https://30906040202157-event-pulse.vercel.app',
+                description: 'Production Server',
+            },
+        ],
+    },
+    apis: ['./routes/*.js'],
+};
+
+const swaggerSpec = swaggerJsdoc(swaggerOptions);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 
 app.use('/api/auth', authRoutes);
 app.use('/api/events', eventRoutes);
