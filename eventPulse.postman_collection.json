@@ -1,0 +1,346 @@
+{
+  "info": {
+    "_postman_id": "39cf8bc5-433a-4d73-b916-417e14c31fc0",
+    "name": "eventPulse",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "54628321",
+    "_collection_link": "https://go.postman.co/collection/54628321-39cf8bc5-433a-4d73-b916-417e14c31fc0?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "New Request",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"admin@eventpulse.com\",\r\n    \"password\": \"1234\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseURL}}/api/auth/login",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "api",
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GetEvents",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "",
+            "value": ""
+          }
+        ],
+        "url": {
+          "raw": "https://30906040202157-event-pulse.vercel.app/api/events",
+          "protocol": "https",
+          "host": [
+            "30906040202157-event-pulse",
+            "vercel",
+            "app"
+          ],
+          "path": [
+            "api",
+            "events"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "CreateEvents",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{bearer_token_0xdm}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\": \"Node.js Developer Summit 2026\",\r\n  \"description\": \"Comprehensive workshop on modern Node.js and Express development\",\r\n  \"category\": \"65f1a2b3c4d5e6f7a8b9c0d1\",\r\n  \"date\": \"2026-10-15T18:00:00.000Z\",\r\n  \"city\": \"Cairo\",\r\n  \"venue\": \"Cairo Tech Hub\",\r\n  \"capacity\": 100\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseURL}}/api/events",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "api",
+            "events"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GetCategories",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/api/categories",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "api",
+            "categories"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "AddEvent",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{json_web_token_06f5}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\": \"Node.js & Express Advanced Workshop\",\r\n  \"description\": \"Building scalable RESTful APIs with MongoDB\",\r\n  \"category\": \"6a858e0f978c40ca40c976ee\",\r\n  \"date\": \"2026-11-01T10:00:00.000Z\",\r\n  \"city\": \"Cairo\",\r\n  \"venue\": \"Downtown Tech Space\",\r\n  \"capacity\": 50\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseURL}}/api/events",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "api",
+            "events"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PostRegistration",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhODU4ZTBmOTc4YzQwY2E0MGM5NzZlYyIsImlhdCI6MTc4NzE1MjYzNywiZXhwIjoxNzg3MjM5MDM3fQ.fVpngWoffq7oHmA5A8CtLCJQmdSiIGbOfyx-KGzE0P8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"eventId\": \"6a85cf966f05efd207f06f1f\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseURL}}/api/registrations",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "api",
+            "registrations"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GetStats",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{supabase_service_role_api_key_06f5}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseURL}}/api/stats",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "api",
+            "stats"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GetMyRegistration",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhODU4ZTBmOTc4YzQwY2E0MGM5NzZlYyIsImlhdCI6MTc4NzE1MjYzNywiZXhwIjoxNzg3MjM5MDM3fQ.fVpngWoffq7oHmA5A8CtLCJQmdSiIGbOfyx-KGzE0P8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DeleteMyRegistration",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhODU4ZTBmOTc4YzQwY2E0MGM5NzZlYyIsImlhdCI6MTc4NzE1MjYzNywiZXhwIjoxNzg3MjM5MDM3fQ.fVpngWoffq7oHmA5A8CtLCJQmdSiIGbOfyx-KGzE0P8"
+          }
+        ],
+        "url": {
+          "raw": "{{baseURL}}/api/registrations/6a85dceb7a02f29dd5840ff1",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "api",
+            "registrations",
+            "6a85dceb7a02f29dd5840ff1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PutEvent",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhODU4ZTBmOTc4YzQwY2E0MGM5NzZlYyIsImlhdCI6MTc4NzI0NDI5OSwiZXhwIjoxNzg3MzMwNjk5fQ.W9ixze9owt1SK9wtNAnbCzqWe401SEBD4tSU-HIAwH8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"title\":\"Updated Event Title\",\r\n    \"capacity\":100\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseURL}}/api/events/6a85cf966f05efd207f06f1f",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "api",
+            "events",
+            "6a85cf966f05efd207f06f1f"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "SendAnnouncment",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhODU4ZTBmOTc4YzQwY2E0MGM5NzZlYyIsImlhdCI6MTc4NzI0ODQ3NywiZXhwIjoxNzg3MzM0ODc3fQ.32b_Rg8TWwqwX_g_wX8vD-ld2AMAhP2liZiyHf2d9dY"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"eventId\": \"65a123456789abcdef123456\",\r\n  \"text\": \"Welcome everyone! The event starts soon.\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseURL}}/api/messages/",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "api",
+            "messages",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "New Request",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
+    }
+  ]
+}
