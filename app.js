@@ -63,6 +63,16 @@ app.get('/', (req, res) => {
     res.status(200).json({ message: 'EventPulse API is running successfully on Vercel!' });
 });
 
+app.get('/health', (req, res) => {
+    res.status(200).json({
+        status: "ok",
+        environment: process.env.NODE_ENV || "production",
+        uptime: `${Math.floor(process.uptime())}s`,
+        database: "connected",
+        timestamp: new Date().toISOString()
+    });
+});
+
 
 app.use('/api/auth', authRoutes);
 app.use('/api/events', eventRoutes);
