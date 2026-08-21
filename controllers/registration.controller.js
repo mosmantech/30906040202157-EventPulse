@@ -14,7 +14,7 @@ exports.registerForEvent = asyncHandler(async (req, res, next) => {
         return next(new AppError('Event not found', 404));
     }
 
-    // 1) تغيير user إلى attendee
+
     const existingRegistration = await Registration.findOne({ event: eventId, attendee: userId });
     if (existingRegistration) {
         return next(new AppError('You are already registered for this event', 400));
@@ -25,7 +25,7 @@ exports.registerForEvent = asyncHandler(async (req, res, next) => {
         return next(new AppError('Event is full to capacity', 400));
     }
 
-    // 2) تغيير user إلى attendee هنا أيضاً
+
     const registration = await Registration.create({
         event: eventId,
         attendee: userId
@@ -39,7 +39,7 @@ exports.registerForEvent = asyncHandler(async (req, res, next) => {
 
 
 exports.cancelRegistration = asyncHandler(async (req, res, next) => {
-    // 3) تغيير user إلى attendee
+
     const registration = await Registration.findOneAndDelete({
         _id: req.params.id,
         attendee: req.user._id
@@ -57,7 +57,7 @@ exports.cancelRegistration = asyncHandler(async (req, res, next) => {
 
 
 exports.getMyRegistrations = asyncHandler(async (req, res, next) => {
-    // 4) تغيير user إلى attendee
+
     const registrations = await Registration.find({ attendee: req.user._id })
         .populate({
             path: 'event',
