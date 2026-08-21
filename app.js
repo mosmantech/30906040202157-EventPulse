@@ -4,6 +4,7 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoSanitize = require('express-mongo-sanitize');
 const http = require('http');
+const path = require('path');
 const { Server } = require('socket.io');
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
@@ -90,7 +91,7 @@ const swaggerOptions = {
             },
         ],
     },
-    apis: ['./routes/*.js'],
+    apis: [path.join(__dirname, './routes/*.js'), path.join(__dirname, './routes/**/*.js')],
 };
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
